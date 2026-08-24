@@ -126,9 +126,12 @@ test('every tool carries a description', live, async () => {
 });
 
 test('the key is accepted by HasData', live, async () => {
+    // Compute the date at run time. A hardcoded future date silently becomes a past date and
+    // then Airbnb rejects the check-in, turning this canary red for the wrong reason.
+    const checkIn = new Date(Date.now() + 30 * 86_400_000).toISOString().slice(0, 10);
     const { raw } = await rpc('tools/call', {
         name: 'hasdata_airbnb_listing_getAirbnbListings',
-        arguments: { location: 'Austin, Texas', checkIn: '2026-09-15' },
+        arguments: { location: 'Austin, Texas', checkIn },
     });
     assert.ok(!raw.includes('401 Unauthorized'), 'HasData rejected the key');
     assert.ok(!raw.includes('"isError":true'), `the tool call failed: ${raw.slice(0, 300)}`);
