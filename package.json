@@ -1,16 +1,40 @@
 {
   "name": "@hasdata/airbnb-mcp",
   "mcpName": "com.hasdata/airbnb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for Airbnb through HasData's hosted API: search stays by location and dates, and read a single listing in full. No Airbnb developer account.",
   "type": "module",
-  "bin": { "hasdata-airbnb-mcp": "index.mjs" },
-  "files": ["index.mjs", "README.md", "LICENSE"],
-  "scripts": { "test": "node --test" },
-  "dependencies": { "mcp-remote": "^0.1.43" },
-  "engines": { "node": ">=18" },
+  "bin": {
+    "hasdata-airbnb-mcp": "index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "mcp-remote": "^0.1.43"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/HasData/airbnb-mcp.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HasData/airbnb-mcp.git"
+  },
   "homepage": "https://hasdata.com/apis/airbnb-api",
-  "keywords": ["mcp", "airbnb", "airbnb-mcp", "travel", "vacation-rental", "model-context-protocol", "hasdata", "scraper"]
+  "keywords": [
+    "mcp",
+    "airbnb",
+    "airbnb-mcp",
+    "travel",
+    "vacation-rental",
+    "model-context-protocol",
+    "hasdata",
+    "scraper"
+  ]
 }
