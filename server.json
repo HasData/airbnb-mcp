@@ -3,7 +3,7 @@
   "name": "com.hasdata/airbnb",
   "title": "HasData Airbnb",
   "description": "Airbnb stays by location and dates, and full listing details, as structured JSON.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "websiteUrl": "https://hasdata.com/apis/airbnb-api",
   "repository": {
     "url": "https://github.com/HasData/airbnb-mcp",
@@ -27,7 +27,7 @@
     {
       "registryType": "npm",
       "identifier": "@hasdata/airbnb-mcp",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "transport": {
         "type": "stdio"
       },
@@ -43,7 +43,7 @@
     {
       "registryType": "pypi",
       "identifier": "hasdata-airbnb-mcp",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
