@@ -2,7 +2,7 @@
   "name": "@hasdata/airbnb-mcp",
   "mcpName": "com.hasdata/airbnb",
   "version": "1.0.1",
-  "description": "MCP server for Airbnb through HasData's hosted API: search stays by location and dates, and read a single listing in full. No Airbnb developer account.",
+  "description": "MCP server for Airbnb through HasData's hosted API: search stays by location and dates, and read a single listing in full. No Airbnb developer account. 1,000 free credits every month.",
   "type": "module",
   "bin": {
     "hasdata-airbnb-mcp": "index.mjs"
