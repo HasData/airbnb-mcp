@@ -18,9 +18,14 @@ const KEY = process.env.HASDATA_API_KEY;
 const TIMEOUT_MS = 30_000;
 
 const EXPECTED = {
-    hasdata_airbnb_listing_getAirbnbListings: ['location', 'checkIn'],
+    hasdata_airbnb_listing_getAirbnbListings: ['checkIn'],
     hasdata_airbnb_property_getAirbnbPropertyDetails: ['url'],
 };
+
+// The listing tool takes a place name or a map bounding box, and a flat `required` array cannot
+// say "either of these". Upstream declares only checkIn and puts the condition in the location
+// description, so the either/or is checked separately below.
+const EITHER_OR = ['location', 'neLat', 'neLng', 'swLat', 'swLng'];
 
 // A streamable HTTP body arrives either as plain JSON or as server-sent events. One SSE event
 // can span several data: lines, several events can share one response, and a server is free to
@@ -124,6 +129,26 @@ test('every tool still declares its required parameter', live, async () => {
             );
         }
     }
+});
+
+test('the listing tool still documents the location or bounding box choice', live, async () => {
+    const tools = await listTools();
+    const listing = tools.find((t) => t.name === 'hasdata_airbnb_listing_getAirbnbListings');
+    assert.ok(listing, 'the listing tool is missing from the list');
+
+    const props = listing.inputSchema?.properties ?? {};
+    for (const field of EITHER_OR) {
+        assert.ok(props[field], `${field} is gone from the listing schema`);
+    }
+
+    // A caller that reads only `required` would send checkIn alone and get a 422. The condition
+    // has to survive somewhere a client can read, and today that is the location description.
+    const note = (props.location?.description || '').toLowerCase();
+    assert.ok(
+        note.includes('bounding box') || note.includes('nelat'),
+        'the location description no longer explains that a map bounding box replaces it, so '
+        + 'nothing in the schema tells a caller how to satisfy the validator'
+    );
 });
 
 test('every tool carries a description', live, async () => {

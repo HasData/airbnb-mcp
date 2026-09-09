@@ -2,7 +2,7 @@
 
 <!-- mcp-name: com.hasdata/airbnb -->
 
-A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf and any other MCP client two read-only Airbnb tools. Search stays by location and dates, and read a single listing in full, all as structured JSON, with no Airbnb developer account and no partner approval.
+A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf and any other MCP client two read-only Airbnb tools. Search stays by place name or map area, and read a single listing in full, all as structured JSON, with no Airbnb developer account and no partner approval.
 
 It reads public listing pages that a signed-out visitor can see.
 
@@ -184,15 +184,18 @@ The samples are the payload, not the whole response. A `tools/call` result carri
 
 [`hasdata_airbnb_listing_getAirbnbListings`](https://docs.hasdata.com/apis/airbnb/listing?utm_source=github&utm_medium=syndication&utm_campaign=airbnb-mcp)
 
-A page of search results by location and dates.
+A page of search results by place name and dates, or by a map area.
 
 | Parameter | Type | Required | Notes |
 | :--- | :--- | :--- | :--- |
-| `location` | string | yes | The place to search, such as `Austin, Texas` |
 | `checkIn` | string | yes | Check-in date, `YYYY-MM-DD` |
+| `location` | string | see below | The place to search, such as `Austin, Texas` |
+| `neLat` / `neLng` / `swLat` / `swLng` | number | see below | Corners of a map bounding box, north-east and south-west |
 | `checkOut` | string | | Check-out date, `YYYY-MM-DD` |
 | `adults` / `children` / `infants` / `pets` | number | | Guest composition, each a count |
 | `nextPageToken` | string | | The `pagination.nextPageToken` from the previous response |
+
+`checkIn` is always required. Beyond it the tool takes either a `location` or a full map bounding box, and a box counts only when all four corners are present. Three of the four fail with `requiredIfExistsAny` on the missing one. A box searches an area Airbnb has no name for, which a place name cannot express.
 
 Returns a `properties` array and `pagination`, whose `nextPageToken` and `pageTokens` walk the result set. Each property carries `id`, `url`, `title`, `latitude`, `longitude`, a short `description` tagline, a `photos` array, `rating`, `reviews`, a `badges` array such as `Guest favorite` or `Superhost`, and a `price` object. `price` holds `originalPrice`, an optional `discountedPrice` when the stay is discounted, a `qualifier` like `for 3 nights`, and a `breakdown`.
 
