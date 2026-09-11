@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "hasdata-airbnb-mcp",
+  "version": "1.0.1",
+  "description": "Airbnb MCP server for Cursor. Search stays by location, dates and guests, then read one listing in full with nightly price, amenities, host and reviews, as structured JSON. Remote MCP server hosted by HasData, connects over streamable HTTP with your HasData API key.",
+  "author": {
+    "name": "HasData",
+    "url": "https://hasdata.com"
+  },
+  "homepage": "https://hasdata.com/apis/airbnb-api",
+  "repository": "https://github.com/HasData/airbnb-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "airbnb",
+    "airbnb-mcp",
+    "travel",
+    "vacation-rental",
+    "model-context-protocol",
+    "hasdata",
+    "scraper"
+  ]
+}
