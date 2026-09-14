@@ -176,6 +176,11 @@ A search result is deliberately light, enough to rank and shortlist. The ameniti
 
 ## Tools
 
+| Tool | Credits | What it returns |
+| :--- | :--- | :--- |
+| `hasdata_airbnb_listing_getAirbnbListings` | 5 | Listing id/url, title, price per night and total, rating, review count, coordinates, photos, host info, room/bed/bath counts, and amenities summary |
+| `hasdata_airbnb_property_getAirbnbPropertyDetails` | 5 | Title, description, location, coordinates, price breakdown, cleaning/service fees, rating and review distribution, host profile, room/bed/bath counts, photos, amenities… |
+
 Two tools, read-only. Samples below are trimmed from real calls, and the numbers move as Airbnb updates. Read them as shapes. Each tool name links to its endpoint reference, which carries the full field list.
 
 The samples are the payload, not the whole response. A `tools/call` result carries one text block, and that text is itself JSON holding `url`, `status`, `text` and `json`, with the scraped data under `json`. From a raw JSON-RPC response the path is `result.content[0].text`, parsed, then `.json`. A chat client unwraps that for you and code talking to the endpoint directly does not.
