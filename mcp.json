@@ -3,7 +3,7 @@
   "mcpServers": {
     "airbnb": {
       "type": "streamable-http",
-      "url": "https://mcp.hasdata.com/api/mcp?apis=airbnb",
+      "url": "https://mcp.hasdata.com/mcp?apis=airbnb",
       "headers": {
         "x-api-key": "YOUR_HASDATA_API_KEY"
       }
