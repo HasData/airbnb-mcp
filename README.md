@@ -178,8 +178,8 @@ A search result is deliberately light, enough to rank and shortlist. The ameniti
 
 | Tool | What it returns |
 | --- | --- |
-| `hasdata_airbnb_listing_getAirbnbListings` | Listing id/url, title, price per night and total, rating, review count, coordinates, photos, host info, room/bed/bath counts, and amenities summary. 5 credits a call |
-| `hasdata_airbnb_property_getAirbnbPropertyDetails` | Title, description, location, coordinates, price breakdown, cleaning/service fees, rating and review distribution, host profile, room/bed/bath counts, photos, amenities…. 5 credits a call |
+| `hasdata_airbnb_listing_getAirbnbListings` | Listing id and url, title, description, coordinates, photos, rating and review count, badges, and a price object holding the stay total, the nightly figure as text and a discounted price when Airbnb shows one. 5 credits a call |
+| `hasdata_airbnb_property_getAirbnbPropertyDetails` | Title, an overview carrying the guest, bedroom, bed and bath counts as text, description, address and coordinates, rating and review count, photos, guest capacity, host profile, amenities with an availability flag each, and safety and property notes. No price. 5 credits a call |
 
 Two tools, read-only. Samples below are trimmed from real calls, and the numbers move as Airbnb updates. Read them as shapes. Each tool name links to its endpoint reference, which carries the full field list.
 
