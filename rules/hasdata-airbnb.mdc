@@ -1,0 +1,28 @@
+---
+description: How to pull Airbnb stays and listing details through the HasData MCP server
+alwaysApply: false
+---
+
+# Airbnb through HasData
+
+Two tools. `hasdata_airbnb_listing_getAirbnbListings` searches, and it requires `checkIn`. `hasdata_airbnb_property_getAirbnbPropertyDetails` opens one stay and takes the listing `url`, which the search returns.
+
+## Framing the search
+
+`location` is the destination as a guest types it. Dates go in `checkIn` and `checkOut` as `YYYY-MM-DD`, and the guest mix splits across `adults`, `children`, `infants` and `pets`, because Airbnb prices them differently.
+
+When the task is about an area rather than a city name, send the bounding box instead. `neLat`, `neLng`, `swLat` and `swLng` travel as a set of four, and three of them fails validation. That is how to search a neighborhood or a stretch of coast without hoping the text matches.
+
+## What the search does not carry
+
+A search result holds `id`, `url`, `title`, `latitude`, `longitude`, `description`, `photos`, `rating`, `reviews`, `badges` and `price`. There are no bedroom, bed or bathroom counts, and no amenities. Those live on the property tool, where `overview` carries them as text such as `3 guests`, `1 bedroom`, `1 bed`, `1 bath`.
+
+`rating` and `reviews` can be missing on a listing with no history. A comparison that treats a missing rating as a low one is wrong, and one that treats it as a high one is worse.
+
+## Reading the price
+
+`price.originalPrice` is the total for the window, and `price.qualifier` says which window, such as `for 3 nights`. When `discountedPrice` is present, that is what the guest pays, and quoting `originalPrice` alone overstates the cost. The nightly figure lives inside `price.breakdown` as a description string rather than as a number.
+
+A search with nothing available returns a successful result with an empty `properties` array. That is an answer about the dates rather than the place.
+
+Page with `nextPageToken`, and open the property tool only for the stays that matter, since that is one call each.
