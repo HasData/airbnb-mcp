@@ -6,7 +6,7 @@ A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf
 
 It reads public listing pages that a signed-out visitor can see.
 
-**1,000 free credits every month, no card required**, which is 200 Airbnb calls.
+**1,000 free credits every month, no card required**, which is 100 Airbnb calls.
 
 ```
 https://mcp.hasdata.com/mcp?apis=airbnb
@@ -154,23 +154,23 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 
 ## Example prompts
 
-Prompts, not code. Paste one in and the agent picks the tool itself. Each is annotated with the calls it takes, because every successful call costs 5 credits.
+Prompts, not code. Paste one in and the agent picks the tool itself. Each is annotated with the calls it takes, because every successful call costs 10 credits.
 
 > Search Austin stays for two adults from September 15 to 18 and give me the ten highest-rated under $200 a night.
 
-*One call, 5 credits. Rating and nightly price come back on the search result.*
+*One call, 10 credits. Rating and nightly price come back on the search result.*
 
 > Take the top result and pull its full amenities, the guest and bedroom count, and the host details.
 
-*One call, 5 credits. Those live on the property page, which the details tool reads by URL.*
+*One call, 10 credits. Those live on the property page, which the details tool reads by URL.*
 
 > Compare the nightly price of a three-night stay for two guests in Austin against Nashville.
 
-*Two calls, 10 credits, one search per city.*
+*Two calls, 20 credits, one search per city.*
 
 > For this listing URL, tell me how many beds and baths it has and whether the host is a Superhost.
 
-*One call, 5 credits.*
+*One call, 10 credits.*
 
 A search result is deliberately light, enough to rank and shortlist. The amenities, beds, host and full description come from the property call, so a prompt that shortlists then inspects three homes is one search plus three property calls.
 
@@ -178,8 +178,8 @@ A search result is deliberately light, enough to rank and shortlist. The ameniti
 
 | Tool | What it returns |
 | --- | --- |
-| `hasdata_airbnb_listing_getAirbnbListings` | Listing id and url, title, description, coordinates, photos, rating and review count, badges, and a price object holding the stay total, the nightly figure as text and a discounted price when Airbnb shows one. 5 credits a call |
-| `hasdata_airbnb_property_getAirbnbPropertyDetails` | Title, an overview carrying the guest, bedroom, bed and bath counts as text, description, address and coordinates, rating and review count, photos, guest capacity, host profile, amenities with an availability flag each, and safety and property notes. No price. 5 credits a call |
+| `hasdata_airbnb_listing_getAirbnbListings` | Listing id and url, title, description, coordinates, photos, rating and review count, badges, and a price object holding the stay total, the nightly figure as text and a discounted price when Airbnb shows one. 10 credits a call |
+| `hasdata_airbnb_property_getAirbnbPropertyDetails` | Title, an overview carrying the guest, bedroom, bed and bath counts as text, description, address and coordinates, rating and review count, photos, guest capacity, host profile, amenities with an availability flag each, and safety and property notes. No price. 10 credits a call |
 
 Two tools, read-only. Samples below are trimmed from real calls, and the numbers move as Airbnb updates. Read them as shapes. Each tool name links to its endpoint reference, which carries the full field list.
 
@@ -273,11 +273,11 @@ Results that carry data also carry a `requestMetadata.id` worth quoting in suppo
 
 ## Pricing, free tier and limits
 
-Each Airbnb tool costs **5 credits per successful call**. Response size does not change the price. A search page with dozens of stays costs the same as one with two.
+Each Airbnb tool costs **10 credits per successful call**. Response size does not change the price. A search page with dozens of stays costs the same as one with two.
 
-The free tier is **1,000 credits every month with no card**, which is 200 Airbnb calls. It renews with the billing cycle, so a low-volume agent runs on the free tier indefinitely.
+The free tier is **1,000 credits every month with no card**, which is 100 Airbnb calls. It renews with the billing cycle, so a low-volume agent runs on the free tier indefinitely.
 
-Paid plans start at **$59 a month** for 200,000 credits, which is 40,000 calls. The unit price falls with volume, from **$1.48 per 1,000 calls** on the entry plan to **$0.60** on Basic and **$0.41** across the Growth tiers. Current figures live on the [pricing page](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=airbnb-mcp).
+Paid plans start at **$59 a month** for 200,000 credits, which is 20,000 calls. The unit price falls with volume, from **$1.48 per 1,000 calls** on the entry plan to **$0.60** on Basic and **$0.41** across the Growth tiers. Current figures live on the [pricing page](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=airbnb-mcp).
 
 Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Handle the overflow case defensively in anything unattended.
 
@@ -357,7 +357,7 @@ HasData accesses publicly available data only. A platform's terms may restrict a
 
 This repository is configuration and documentation for a remote server. There is no build step and nothing to containerize.
 
-The tests in `test/` assert the tool contract, the part that can break without a commit here. They check that `?apis=airbnb` returns exactly two tools, that every tool still declares its required parameters, that no name changed, and that the key in use is actually accepted. That last check calls a tool for real and costs 5 credits, which is the price of a canary that can fail for the right reason.
+The tests in `test/` assert the tool contract, the part that can break without a commit here. They check that `?apis=airbnb` returns exactly two tools, that every tool still declares its required parameters, that no name changed, and that the key in use is actually accepted. That last check calls a tool for real and costs 10 credits, which is the price of a canary that can fail for the right reason.
 
 ```bash
 # macOS and Linux
