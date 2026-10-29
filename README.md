@@ -2,7 +2,7 @@
 
 <!-- mcp-name: com.hasdata/airbnb -->
 
-A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf and any other MCP client two read-only Airbnb tools. Search stays by place name or map area, and read a single listing in full, all as structured JSON, with no Airbnb developer account and no partner approval.
+A hosted [Airbnb MCP server](https://hasdata.com/mcp/airbnb?utm_source=github&utm_medium=syndication&utm_campaign=airbnb-mcp&utm_content=readme-intro) that gives Claude, Cursor, Windsurf and any other MCP client two read-only Airbnb tools. Search stays by place name or map area, and read a single listing in full, all as structured JSON, with no Airbnb developer account and no partner approval.
 
 It reads public listing pages that a signed-out visitor can see.
 
@@ -279,7 +279,7 @@ The free tier is **1,000 credits every month with no card**, which is 100 Airbnb
 
 Paid plans start at **$59 a month** for 200,000 credits, which is 20,000 calls. The unit price falls with volume, from **$1.48 per 1,000 calls** on the entry plan to **$0.60** on Basic and **$0.41** across the Growth tiers. Current figures live on the [pricing page](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=airbnb-mcp).
 
-Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Handle the overflow case defensively in anything unattended.
+Your plan also sets concurrency. The free tier allows 5 requests at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Handle the overflow case defensively in anything unattended.
 
 A request that comes back non-200 is not billed. A successful call that finds nothing is still a call.
 
